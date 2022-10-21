@@ -379,7 +379,7 @@ void CiMainGenerator::Gen_ConfigHeader()
   ConfigGenerator confgen;
   confgen.FillHeader((*fwriter), fdesc->gen);
 
-  fwriter->Flush(fdesc->file.confdir + '/' + fdesc->gen.drvname + "-config.h");
+  fwriter->Flush(fdesc->file.confdir + '/' + "dummy.h");
 }
 
 void CiMainGenerator::Gen_FMonHeader()
