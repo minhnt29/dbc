@@ -103,20 +103,10 @@ void CiMainGenerator::Gen_MainHeader()
   fwriter->Append("#define %s (%uU)", fdesc->gen.verlow_def.c_str(), fdesc->gen.lowver);
   fwriter->Append();
 
-  fwriter->Append("// include current dbc-driver compilation config");
-  fwriter->Append("#include <%s-config.h>", fdesc->gen.drvname.c_str());
-  fwriter->Append();
-
-  fwriter->Append("#ifdef %s", fdesc->gen.usemon_def.c_str());
-
-  fwriter->Append(
-    "// This file must define:\n"
-    "// base monitor struct\n"
-    "#include <canmonitorutil.h>\n"
-    "\n"
-  );
-
-  fwriter->Append("#endif // %s", fdesc->gen.usemon_def.c_str());
+  fwriter->Append("#define %s_USE_SIGFLOAT", fdesc->gen.DRVNAME.c_str());
+  fwriter->Append("typedef double sigfloat_t;");
+  fwriter->Append("typedef uint32_t ubitext_t;");
+  fwriter->Append("typedef int32_t bitext_t;");
   fwriter->Append(2);
 
   for (size_t num = 0; num < sigprt->sigs_expr.size(); num++)
@@ -322,22 +312,7 @@ void CiMainGenerator::Gen_MainSource()
 
   fwriter->Append("#endif // %s", fdesc->gen.usemon_def.c_str());
   fwriter->Append("");
-  fwriter->Append("// This macro guard for the case when you need to enable");
-  fwriter->Append("// using diag monitors but there is no necessity in proper");
-  fwriter->Append("// SysTick provider. For providing one you need define macro");
-  fwriter->Append("// before this line - in dbccodeconf.h");
-  fwriter->Append("");
-  fwriter->Append("#ifndef GetSystemTick");
-  fwriter->Append("#define GetSystemTick() (0u)");
-  fwriter->Append("#endif");
-  fwriter->Append("");
-  fwriter->Append("// This macro guard is for the case when you want to build");
-  fwriter->Append("// app with enabled optoin auto CSM, but don't yet have");
-  fwriter->Append("// proper getframehash implementation");
-  fwriter->Append("");
-  fwriter->Append("#ifndef GetFrameHash");
-  fwriter->Append("#define GetFrameHash(a,b,c,d,e) (0u)");
-  fwriter->Append("#endif");
+  
   fwriter->Append();
 
   fwriter->Append(extend_func_body, ext_sig_func_name), 1;

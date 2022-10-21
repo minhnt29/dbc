@@ -7,12 +7,6 @@ static const int32_t kTmpLen = 1024;
 
 static char _tmpb[kTmpLen];
 
-static const char* kLibDir = "/lib";
-static const char* kUsrDir = "/usr";
-static const char* kIncDir = "/inc";
-static const char* kConfDir = "/conf";
-static const char* kUtilDir = "/butl";
-
 FsCreator::FsCreator()
 {
 }
@@ -21,39 +15,39 @@ FsCreator::FsCreator()
 void FsCreator::Configure(const std::string& drvname, const std::string& outpath,
   const std::string& info, uint32_t h, uint32_t l)
 {
-  FS.file.libdir = outpath + kLibDir;
-  FS.file.usrdir = outpath + kUsrDir;
-  FS.file.incdir = outpath + kIncDir;
-  FS.file.confdir = outpath + kConfDir;
-  FS.file.utildir = outpath + kUtilDir;
+  FS.file.libdir = outpath;
+  FS.file.usrdir = outpath + "/dummy";
+  FS.file.incdir = outpath + "/dummy";
+  FS.file.confdir = outpath + "/dummy";
+  FS.file.utildir = outpath + "/dummy";
 // directory valid and exists, set all the values
   FS.gen.DrvName_orig = drvname;
   FS.gen.DRVNAME = str_toupper(drvname);
   FS.gen.drvname = str_tolower(drvname);
 
-  FS.file.core_h.dir = outpath;
+  FS.file.core_h.dir = outpath + "/include";
   FS.file.core_h.fname = FS.gen.drvname + ".h";
-  FS.file.core_h.fpath = FS.file.libdir + "/" + FS.file.core_h.fname;
+  FS.file.core_h.fpath = FS.file.libdir + "/include/" + FS.file.core_h.fname;
 
-  FS.file.core_c.dir = outpath;
+  FS.file.core_c.dir = outpath + "/src";
   FS.file.core_c.fname = FS.gen.drvname + ".c";
-  FS.file.core_c.fpath = FS.file.libdir + "/" + FS.file.core_c.fname;
+  FS.file.core_c.fpath = FS.file.libdir + "/src/" + FS.file.core_c.fname;
 
-  FS.file.util_h.dir = outpath;
-  FS.file.util_h.fname = FS.gen.drvname + "-binutil" + ".h";
-  FS.file.util_h.fpath = FS.file.utildir + "/" + FS.file.util_h.fname;
+  FS.file.util_h.dir = outpath + "/dummy";
+  FS.file.util_h.fname = "dummy.h";
+  //FS.file.util_h.fpath = FS.file.utildir + "/" + FS.file.util_h.fname;
 
-  FS.file.util_c.dir = outpath;
-  FS.file.util_c.fname = FS.gen.drvname + "-binutil" + ".c";
+  FS.file.util_c.dir = outpath + "/dummy";
+  FS.file.util_c.fname = "dummy.h";
   FS.file.util_c.fpath = FS.file.utildir + "/" + FS.file.util_c.fname;
 
-  FS.file.fmon_h.dir = outpath;
-  FS.file.fmon_h.fname = FS.gen.drvname + "-fmon.h";
-  FS.file.fmon_h.fpath = FS.file.libdir + "/" + FS.file.fmon_h.fname;
+  FS.file.fmon_h.dir = outpath + "/dummy";
+  FS.file.fmon_h.fname = "dummy.h";
+  //FS.file.fmon_h.fpath = FS.file.libdir + "/" + FS.file.fmon_h.fname;
 
-  FS.file.fmon_c.dir = outpath;
-  FS.file.fmon_c.fname = FS.gen.drvname + "-fmon.c";
-  FS.file.fmon_c.fpath = FS.file.usrdir + "/" + FS.file.fmon_c.fname;
+  FS.file.fmon_c.dir = outpath + "/dummy";
+  FS.file.fmon_c.fname = "dummy.h";
+  //FS.file.fmon_c.fpath = FS.file.usrdir + "/" + FS.file.fmon_c.fname;
 
   snprintf(_tmpb, kTmpLen, "%s_USE_BITS_SIGNAL", FS.gen.DRVNAME.c_str());
   FS.gen.usebits_def = _tmpb;

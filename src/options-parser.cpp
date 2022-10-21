@@ -57,7 +57,7 @@ OptionsParser::Pairs OptionsParser::GetOptions(int argc, char** argv)
     }
     else if (ret[i].first.compare("-nodeutils") == 0)
     {
-      pairs.is_nodeutils = true;
+    pairs.is_nodeutils = true;
     }
     else if (ret[i].first.compare("-help") == 0)
     {
@@ -65,17 +65,16 @@ OptionsParser::Pairs OptionsParser::GetOptions(int argc, char** argv)
     }
     else if (ret[i].first.compare("-noinc") == 0)
     {
-      pairs.is_nocanmon = true;
+    pairs.is_nocanmon = true;
     }
     else if (ret[i].first.compare("-noconfig") == 0)
     {
-      pairs.is_noconfig = true;
+    pairs.is_noconfig = true;
     }
     else if (ret[i].first.compare("-nofmon") == 0)
     {
-      pairs.is_nofmon = true;
+    pairs.is_nofmon = true;
     }
   }
-
   return pairs;
 }

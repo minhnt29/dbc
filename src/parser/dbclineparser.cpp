@@ -269,7 +269,7 @@ bool DbcLineParser::ParseSignalLine(SignalDescriptor_t* sig, const std::string& 
     // mark all simple signals to make using them easier
     if (!sig->IsDoubleSig && (sig->Factor == 1) && (sig->Offset == 0))
     {
-      sig->IsSimpleSig = true;
+      sig->IsSimpleSig = false;
     }
 
     if (!sig->IsSimpleSig)
